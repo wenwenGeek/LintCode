@@ -9,13 +9,13 @@ import java.util.List;
  **/
 public class SuanFa32 {
 
-    public int[] levelOrder(TreeNode root) {
+    public int[] levelOrder(TreeNode1 root) {
         if (root == null) {
             return new int[]{};
         }
 
-        List<TreeNode> needTree = new ArrayList<>();
-        List<TreeNode> AllTree = new ArrayList<>();
+        List<TreeNode1> needTree = new ArrayList<>();
+        List<TreeNode1> AllTree = new ArrayList<>();
         needTree.add(root);
 
         while (needTree != null && needTree.size() > 0) {
@@ -26,13 +26,13 @@ public class SuanFa32 {
         return AllTree.stream().mapToInt(treeNode -> treeNode.val).toArray();
     }
 
-    public List<TreeNode> returnNextNod(List<TreeNode> thisNodes) {
+    public List<TreeNode1> returnNextNod(List<TreeNode1> thisNodes) {
         if (thisNodes == null || thisNodes.size() == 0) {
             return null;
         }
 
-        List<TreeNode> returnNode = new ArrayList<>();
-        for (TreeNode thisNode : thisNodes) {
+        List<TreeNode1> returnNode = new ArrayList<>();
+        for (TreeNode1 thisNode : thisNodes) {
             if (thisNode.left != null) {
                 returnNode.add(thisNode.left);
             }
@@ -44,13 +44,13 @@ public class SuanFa32 {
     }
 }
 
-class TreeNode {
+class TreeNode1 {
 
     int val;
-    TreeNode left;
-    TreeNode right;
+    TreeNode1 left;
+    TreeNode1 right;
 
-    TreeNode(int x) {
+    TreeNode1(int x) {
         val = x;
     }
 }
