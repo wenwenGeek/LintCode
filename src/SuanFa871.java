@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.PriorityQueue;
 
 /**
  * SuanFa55
@@ -9,33 +11,36 @@ import java.util.Arrays;
 public class SuanFa871 {
 
     public static void main(String[] args) {
-        int[][] matrix = {{0, 30}, {15, 20}, {5, 10}, {-10, 20}};
-        System.out.println(findMinArrowShots(matrix));
+        //                  加                                       加
+        int[][] matrix = {{10, 60}, {20, 30}, {30, 30}, {60, 40}};
+        System.out.println(minRefuelStops(100, 10, matrix));
     }
 
-    public static int findMinArrowShots(int[][] points) {
-        if (points.length == 0) return 0;
-        Arrays.sort(points, (a, b) -> a[0] - b[0]);
+    public static int minRefuelStops(int target, int startFuel, int[][] stations) {
+        if (startFuel >= target) return 0;
 
-        int[] nowMin = points[0];
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int count = 0;
+        for (int i = 0; i < stations.length; i++) {
+            while (startFuel < stations[i][0]) {
+                if (pq.isEmpty()) return -1;
+                startFuel += pq.poll();
+                count++;
+            }
 
-        int jian = 1;
+            if (startFuel >= target) {
+                return count;
+            }
+            pq.add(stations[i][1]);
+        }
+        while (true) {
+            if (pq.isEmpty()) return -1;
+            startFuel += pq.poll();
+            count++;
 
-        for (int i = 1; i < points.length; i++) {
-            int[] newQiqiu = points[i];
-
-            if (newQiqiu[0] >= nowMin[0] && newQiqiu[0] <= nowMin[1]) {
-                nowMin[0] = newQiqiu[0];
-                if (newQiqiu[1] < nowMin[1]) {
-                    nowMin[1] = newQiqiu[1];
-                }
-            } else {
-                jian++;
-                nowMin = newQiqiu;
+            if (startFuel >= target) {
+                return count;
             }
         }
-
-        return jian;
     }
-
 }
