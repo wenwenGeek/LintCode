@@ -6,33 +6,33 @@
  **/
 public class SuanFa55 {
 
-    public int maxSubArray(int[] nums) {
+    public static void main(String[] args) {
+        System.out.println(canJump(new int[]{3, 2, 1, 0, 4}));
+    }
 
-        if (nums.length == 0) {
-            return 0;
-        }
+    public static boolean canJump(int[] nums) {
         if (nums.length == 1) {
-            return nums[0];
+            return true;
         }
-
-        int sum_a;
-        int max = nums[0];
-
-        for (int i = 0; i < nums.length; i++) {
-            sum_a = nums[i];
-            if (sum_a > max) {
-                max = sum_a;
+        if (nums[0] == 0) {
+            return false;
+        }
+        int zeroCount = 0;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] == 0 && i != nums.length - 1) {
+                zeroCount++;
+                continue;
             }
-            for (int j = i + 1; j < nums.length; j++) {
-                sum_a += nums[j];
-                if (sum_a > max) {
-                    max = sum_a;
+            if (zeroCount > 0) {
+                if (zeroCount < nums[i]) {
+                    zeroCount = 0;
+                    continue;
+                } else {
+                    zeroCount++;
                 }
             }
-
         }
-        return max;
-
+        return zeroCount == 0;
     }
 
 }
