@@ -1,3 +1,6 @@
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * SuanFa55
  *
@@ -62,4 +65,19 @@ public class SuanFa45 {
 
     }
 
+
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> hasSet = new HashSet<>();
+        Set<Integer> returnSet = new HashSet<>();
+
+        for (int i : nums1) {
+            hasSet.add(i);
+        }
+        for (int i : nums2) {
+            if(hasSet.contains(i)){
+                returnSet.add(i);
+            }
+        }
+        return returnSet.stream().mapToInt(i->i).toArray();
+    }
 }
