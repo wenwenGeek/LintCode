@@ -1,6 +1,3 @@
-import com.sun.org.apache.bcel.internal.generic.ReturnaddressType;
-import javax.swing.text.html.HTMLDocument.HTMLReader;
-
 /**
  * 翻转链表
  *
@@ -27,7 +24,8 @@ public class 翻转链表 {
         node5.next = node6;
         node6.next = null;
 
-        System.out.println(reverseBetween(node1,2,4));
+        ListNode listNode = reverseBetween(node1, 2, 4);
+        System.out.println(listNode);
     }
 
    /* public static ListNode reverseBetween(ListNode head, int m, int n) {
@@ -55,31 +53,44 @@ public class 翻转链表 {
     }
 */
 
-    static ListNode endNode = null;
 
-    public static ListNode reverseBetween(ListNode head, int m, int n){
+   private static ListNode endNode = null;
+
+    public static ListNode reverseBetween(ListNode head, int m, int n) {
+
 
         if(m==1){
-            return digui(head,n);
-
+            return digui(head, n);
         }
 
-        head.next = reverseBetween(head.next,m-1,n-1);
+        head.next = reverseBetween(head.next, m-1, n-1);
         return head;
 
     }
 
-    public static ListNode digui(ListNode head,int n){
+    public static ListNode digui(ListNode listNode,int n){
 
         if(n==1){
-            endNode = head.next;
-            return head;
+            endNode = listNode.next;
+            return listNode;
         }
 
-        ListNode lastNode = digui(head.next,n-1);
-        head.next.next=head;
-        head.next = endNode;
+        ListNode lastNode = digui(listNode.next, n-1);
 
+        listNode.next.next = listNode;
+        listNode.next = endNode;
         return lastNode;
+
     }
-    }
+
+
+
+
+
+
+
+
+
+
+
+}
